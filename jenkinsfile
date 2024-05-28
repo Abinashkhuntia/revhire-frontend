@@ -11,6 +11,18 @@ pipeline {
                 url: 'https://github.com/Abinashkhuntia/revhire-frontend.git'
             }
         }
+        stage('Building the Infrastructure') {
+            steps {
+                script {
+                    sh "cd ../terraform"
+                    sh "terraform init"
+                    sh "terraform plan"
+                    sh "terraform apply -auto-approve"
+                echo "buildig..."
+                }
+            }
+        }
+        
         stage('checking pre-requisites') {
             steps {
                 script {
