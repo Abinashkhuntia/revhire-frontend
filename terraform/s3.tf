@@ -52,7 +52,6 @@ resource "aws_s3_bucket_policy" "mybucket_policy" {
 
 
 locals {
-  mimetypes = {
     html  = "text/html"
     js    = "application/javascript"
     css   = "text/css"
@@ -66,7 +65,6 @@ locals {
     otf   = "font/otf"
     woff2 = "font/woff2"
   }
-}
 
 
 
