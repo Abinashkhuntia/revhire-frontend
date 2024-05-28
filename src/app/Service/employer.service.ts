@@ -9,7 +9,7 @@ import { Application } from '../Model/application';
 })
 export class EmployerService {
 
-  base_url = "http://ab94a40f315d24f9c82a40a9031258cc-1829343187.us-east-1.elb.amazonaws.com:8082/";
+  base_url = "http://aed780fe13f2a47e98ec2bc8c6871cd6-1844585885.us-east-1.elb.amazonaws.com:8082/";
   constructor(private http: HttpClient) {   }
 
   public getJob(Id:number):Observable <any>{

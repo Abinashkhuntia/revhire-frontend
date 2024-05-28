@@ -1,0 +1,47 @@
+pipeline { 
+    environment {
+        bucket-URI = "s3://revhire-frontend"
+        
+    }
+    agent any 
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/Abinashkhuntia/revhire-frontend.git'
+            }
+        }
+        stage('checking pre-requisites') {
+            steps {
+                script {
+                    sh "git --version"
+                    sh "kubectl version"
+                    sh "docker --version"
+                    sh "terraform --version"
+                    sh "npm --version"
+                    sh "nodejs --version"
+                    ng "ng --version"
+                }
+            }
+        }
+        stage('Building the Frontend artifacts'){
+            steps {
+                script {
+                    echo "Building the Frontend artifacts"
+                    sh "cd ../revhire-frontend"
+                    sh "npm install"
+                    sh "npm run build"
+                }
+            }
+        }
+        stage('Pushing build artifact to s3') {
+            steps {
+                script {
+                    echo "Pushing build artifact to s3"
+                    sh "aws  s3 rm ${bucket-URI} --recursive "
+                    sh "aws s3 sync ../revhire-frontend/dist/ ${bucket-URI}"
+                }
+            }
+        }
+    } 
+}
