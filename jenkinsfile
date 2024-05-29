@@ -21,22 +21,7 @@ pipeline {
                 }
             }
         }
-        stage('Building the Infrastructure') {
-            steps {
-                script {
-                    sh '''
-                        cd terraform
-                        pwd
-                        sudo su
-                        terraform init
-                        terraform plan
-                        terraform apply -auto-approve
-                        
-                    '''
-                echo "buildig..."
-                }
-            }
-        }
+        
         stage('Pushing build artifact to s3') {
             steps {
                 script {
