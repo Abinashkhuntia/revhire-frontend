@@ -24,8 +24,8 @@ pipeline {
         stage('Building the Infrastructure') {
             steps {
                 script {
-                    sh "pwd"
                     sh "cd terraform"
+                    sh "pwd"
                     sh "terraform init"
                     sh "terraform plan"
                     sh "terraform apply -auto-approve"
