@@ -25,13 +25,15 @@ pipeline {
         }
         
         stage('Push to S3') {
-        steps {
-            script {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'your-credentials-id', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    echo "Pushing build artifact to s3"
-                    sh "aws s3 rm ${bucket_URI} --recursive"
-                    sh "aws s3 sync dist/revhire ${bucket_URI}"
+            steps {
+                script {
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-credential', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        echo "Pushing build artifact to s3"
+                        sh "aws s3 rm ${bucket_URI} --recursive"
+                        sh "aws s3 sync dist/revhire ${bucket_URI}"
+                    }
                 }
             }
         }
+    }
 }
