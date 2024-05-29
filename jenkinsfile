@@ -17,7 +17,7 @@ pipeline {
                 script {
                     echo "Building the Frontend artifacts"
                     sh "npm install"
-                    // sh "ng build "
+                    sh "ng build "
                 }
             }
         }
@@ -27,7 +27,9 @@ pipeline {
                     sh '''
                         cd terraform
                         pwd
-                        terraform init
+                        sudo terraform init
+                        sudo terraform plan
+                        sudo terraform apply -auto-approve
                         
                     '''
                 echo "buildig..."

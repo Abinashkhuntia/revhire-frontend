@@ -34,9 +34,9 @@ unzip awscliv2.zip
 sudo ./aws/install
 
 # Install Terraform
-wget https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip
-unzip terraform_0.14.7_linux_amd64.zip
-sudo mv terraform /usr/local/bin/
+wget https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.zip
+unzip terraform_1.8.2_linux_amd64.zip -d /usr/local/bin/
+
 
 # Clean up
 rm -f awscliv2.zip terraform_0.14.7_linux_amd64.zip
