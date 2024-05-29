@@ -16,8 +16,10 @@ pipeline {
             steps {
                 script {
                     echo "Building the Frontend artifacts"
-                    sh "npm install"
-                    sh "ng build "
+                    sh 'whoami'
+
+                    // sh "npm install"
+                    // sh "ng build "
                 }
             }
         }
