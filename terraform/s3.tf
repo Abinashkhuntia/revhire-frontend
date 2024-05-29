@@ -67,23 +67,12 @@ locals {
   }
 
 
-
-# resource "aws_s3_object" "files" {
-#   for_each     = fileset("dist/", "**/*")
-#   bucket       = aws_s3_bucket.mybucket.bucket
-#   key          = each.value
-#   source       = "dist/${each.value}"
-#   acl          = "public-read"
-#   content_type = lookup(local.mimetypes, regex("[^.]+$", each.value), "application/octet-stream")
-
-# }
-
-# resource "aws_s3_bucket_website_configuration" "website" {
-#   bucket = aws_s3_bucket.mybucket.id
-#   index_document {
-#     suffix = "index.html"
-#   }
-# }
+resource "aws_s3_bucket_website_configuration" "website" {
+  bucket = aws_s3_bucket.mybucket.id
+  index_document {
+    suffix = "index.html"
+  }
+}
 
 
 

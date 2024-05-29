@@ -9,7 +9,7 @@ import { LoginCredentials } from '../Model/login-credentials';
 })
 export class GeneralService {
 
-  base_url = "http://aed780fe13f2a47e98ec2bc8c6871cd6-1844585885.us-east-1.elb.amazonaws.com:8082/";
+  base_url = "http://a5b35124caa8f42b69364283ea60e76a-4213808ec362ec07.elb.us-east-1.amazonaws.com/";
   constructor(private http: HttpClient) {   }
 
   public getUser(userId:number):Observable <any>{

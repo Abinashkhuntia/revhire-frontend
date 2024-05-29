@@ -1,6 +1,6 @@
 pipeline { 
     environment {
-        bucket-URI = "s3://revhire-frontend"
+        bucket_URI="s3://revhire-tf-bucket"
         
     }
     agent any 
@@ -14,10 +14,10 @@ pipeline {
         stage('Building the Infrastructure') {
             steps {
                 script {
-                    sh "cd ../terraform"
-                    sh "terraform init"
-                    sh "terraform plan"
-                    sh "terraform apply -auto-approve"
+                    // sh "cd ../terraform"
+                    // sh "terraform init"
+                    // sh "terraform plan"
+                    // sh "terraform apply -auto-approve"
                 echo "buildig..."
                 }
             }
@@ -42,18 +42,18 @@ pipeline {
                     echo "Building the Frontend artifacts"
                     sh "cd ../revhire-frontend"
                     sh "npm install"
-                    sh "npm run build"
+                    // sh "ng build "
                 }
             }
         }
-        stage('Pushing build artifact to s3') {
-            steps {
-                script {
-                    echo "Pushing build artifact to s3"
-                    sh "aws  s3 rm ${bucket-URI} --recursive "
-                    sh "aws s3 sync ../revhire-frontend/dist/ ${bucket-URI}"
-                }
-            }
-        }
+        // stage('Pushing build artifact to s3') {
+        //     steps {
+        //         script {
+        //             echo "Pushing build artifact to s3"
+        //             sh "aws  s3 rm ${bucket-URI} --recursive "
+        //             sh "aws s3 sync ../revhire-frontend/dist/ ${bucket-URI}"
+        //         }
+        //     }
+        // }
     } 
 }
