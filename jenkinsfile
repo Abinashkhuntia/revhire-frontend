@@ -11,39 +11,26 @@ pipeline {
                 url: 'https://github.com/Abinashkhuntia/revhire-frontend.git'
             }
         }
-        stage('Building the Infrastructure') {
-            steps {
-                script {
-                    sh "pwd"
-                    // sh "cd ../terraform"
-                    // sh "terraform init"
-                    // sh "terraform plan"
-                    // sh "terraform apply -auto-approve"
-                echo "buildig..."
-                }
-            }
-        }
         
-        stage('checking pre-requisites') {
-            steps {
-                script {
-                    sh "git --version"
-                    sh "kubectl version"
-                    sh "docker --version"
-                    sh "terraform --version"
-                    sh "npm --version"
-                    sh "nodejs --version"
-                    ng "ng --version"
-                }
-            }
-        }
         stage('Building the Frontend artifacts'){
             steps {
                 script {
                     echo "Building the Frontend artifacts"
-                    // sh "cd ../revhire-frontend"
-                    // sh "npm install"
-                    // sh "ng build "
+                    sh "npm install"
+                    sh "ng build "
+                }
+            }
+        }
+        stage('Building the Infrastructure') {
+            steps {
+                script {
+                    sh "pwd"
+                    sh "cd terraform"
+                    sh "terraform init"
+                    sh "terraform plan"
+                    sh "terraform apply -auto-approve"
+                    sh "cd .."
+                echo "buildig..."
                 }
             }
         }
@@ -51,8 +38,8 @@ pipeline {
             steps {
                 script {
                     echo "Pushing build artifact to s3"
-                    // sh "aws  s3 rm ${bucket-URI} --recursive "
-                    // sh "aws s3 sync ../revhire-frontend/dist/revhire ${bucket-URI}"
+                    sh "aws  s3 rm ${bucket-URI} --recursive "
+                    sh "aws s3 sync dist/revhire ${bucket-URI}"
                 }
             }
         }
