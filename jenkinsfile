@@ -42,18 +42,18 @@ pipeline {
                     echo "Building the Frontend artifacts"
                     sh "cd ../revhire-frontend"
                     sh "npm install"
-                    // sh "ng build "
+                    sh "ng build "
                 }
             }
         }
-        // stage('Pushing build artifact to s3') {
-        //     steps {
-        //         script {
-        //             echo "Pushing build artifact to s3"
-        //             sh "aws  s3 rm ${bucket-URI} --recursive "
-        //             sh "aws s3 sync ../revhire-frontend/dist/ ${bucket-URI}"
-        //         }
-        //     }
-        // }
+        stage('Pushing build artifact to s3') {
+            steps {
+                script {
+                    echo "Pushing build artifact to s3"
+                    sh "aws  s3 rm ${bucket-URI} --recursive "
+                    sh "aws s3 sync ../revhire-frontend/dist/revhire ${bucket-URI}"
+                }
+            }
+        }
     } 
 }
