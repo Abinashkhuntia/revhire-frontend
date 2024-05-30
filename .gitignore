@@ -63,6 +63,7 @@ Thumbs.db
 # Ignore local .terraform directories
 **/.terraform/
 **/.terraform/*
+terraform/.terraform.lock.hcl
 
 # Ignore Terraform variable files
 **/*.tfvars
